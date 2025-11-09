@@ -57,4 +57,5 @@ package() {
 	done
 	install -Dm644 ${srcdir}/${pkgname}/dkms.conf "${pkgdir}"/usr/src/${pkgname}/dkms.conf
 	install -Dm644 ${srcdir}/${pkgname}/modules-load.conf "${pkgdir}"/etc/modules-load.d/${_pkgbase}.conf
+	exit 1
 }

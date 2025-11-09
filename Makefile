@@ -39,7 +39,7 @@ dkms.conf: dkms_conf.template PKGBUILD
 modules-load.conf: dkms_conf.template PKGBUILD
 	@sh -c ' \
 	  export $(shell grep -E "^_pkgbase=" PKGBUILD ); \
-	  echo "${_pkgbase}" > modules-load.conf \
+	  echo "$${_pkgbase}" > modules-load.conf \
 	'
 
 modules:
