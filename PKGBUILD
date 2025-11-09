@@ -15,15 +15,14 @@ depends=(
 	'curl'
 	'dkms'
 	'gawk'
+	'gcc'
 	'git'
 	'grep'
 	'kmod'
 	'libarchive'
 	'linux-headers'
 	'make'
-	'pacman'
 	'sed'
-	'sudo'
 )
 install=${_pkgbase}.install
 source=(
