@@ -19,7 +19,7 @@ INSTALL_MOD_PATH ?= $(DESTDIR)
 all default: modules
 
 update:
-	-@sh -c '[ -d .git ] && git reset --hard && git pull || (curl -sL "https://github.com/rbm78bln/kmod_s5divert/archive/refs/heads/main.zip" | bsdtar --extract --strip-components=1 --verbose --file -)'
+	-@sh -c '[ -d .git ] && git reset --hard -q && git pull -q || (curl -sL "https://github.com/rbm78bln/kmod_s5divert/archive/refs/heads/main.zip" | bsdtar --extract --strip-components=1 --verbose --file -)'
 
 aur: kmod_s5divert-dkms.pkg.tar
 
