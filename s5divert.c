@@ -344,9 +344,7 @@ static bool sysoff_hook_already_applied(void)
 static int sysoff_hook_apply(void)
 {
 	sysoff_hook_unregister();
-	if (param_s5divert_enabled != 0) {
-		sysoff_hook_register();
-	}
+	if (param_s5divert_enabled != 0) sysoff_hook_register();
 	return 0;
 }
 
