@@ -1,6 +1,7 @@
 # kmod_s5divert
 
 An ACPI kernel module to divert system power off from S5 to S4, S3, or system reboot.
+Requires Linux kernel version 6.2.0 or later.
 
 Many ACPI systems can only wake from the S5 (soft off) state using the power button. However, this limitation usually doesn’t apply to S4 (suspend to disk) or S3 (suspend to RAM). These states often support several additional wakeup sources, though they consume slightly more power while suspended. Unfortunately, when you shut down your system normally, it typically enters S5, making it impossible to wake from any other source.
 
