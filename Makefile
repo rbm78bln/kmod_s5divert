@@ -28,6 +28,20 @@ kmod_s5divert-dkms.pkg.tar:
 	mv -f kmod_s5divert-dkms-*.pkg.tar kmod_s5divert-dkms.pkg.tar
 	rm -rf src pkg
 
+dkms.conf: dkms_conf.template PKGBUILD
+	@sh -c ' \
+	  export $(shell grep -E "^_pkgbase=" PKGBUILD ); \
+	  export $(shell grep -E "^pkgname=" PKGBUILD ); \
+	  export pkgver=$$(grep MODULE_VERSION $${_pkgbase}.c | cut "-d\"" -f2); \
+	  sed -e "s/@PKGBASE@/$${_pkgbase}/" -e "s/@PKGNAME@/$${pkgname}/" -e "s/@PKGVER@/$${pkgver}/" <dkms_conf.template >dkms.conf \
+	'
+
+modules-load.conf: dkms_conf.template PKGBUILD
+	@sh -c ' \
+	  export $(shell grep -E "^_pkgbase=" PKGBUILD ); \
+	  echo "${_pkgbase}" > modules-load.conf \
+	'
+
 modules:
 	$(MAKE) -C $(KDIR) M=$(PWD) LDFLAGS_MODULE=-Map=$(modname).map modules
 	objdump -dS $(modname).ko > $(modname).asm

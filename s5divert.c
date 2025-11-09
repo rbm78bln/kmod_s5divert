@@ -732,7 +732,7 @@ static void __exit s5divert_exit(void)
 	pr_info("s5divert: unloaded\n");
 }
 
-MODULE_VERSION("0.1");
+MODULE_VERSION("1.0.0");
 MODULE_DESCRIPTION("Divert system power off from ACPI S5 to S4, S3, or system reboot");
 MODULE_AUTHOR("rbm78bln");
 MODULE_LICENSE("GPL");
