@@ -1,0 +1,14 @@
+post_install() {
+  make -C '/usr/src/kmod_s5divert-dkms' update || true
+  depmod -a
+}
+
+post_upgrade() {
+  make -C '/usr/src/kmod_s5divert-dkms' update || true
+  depmod -a
+}
+
+post_remove() {
+  rm -rf '/usr/src/kmod_s5divert-dkms' || true
+  depmod -a
+}

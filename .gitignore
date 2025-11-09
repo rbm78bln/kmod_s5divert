@@ -1,0 +1,15 @@
+*.o
+*.ko
+*.mod
+*.mod.*
+*.symvers
+modules.order
+Module.symvers
+*.cmd
+.*.cmd
+*.order
+dkms.conf
+kmod_s5divert-dkms.pkg.tar
+s5divert.asm
+s5divert.map
+s5divert.symbols
