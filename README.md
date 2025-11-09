@@ -18,10 +18,10 @@ version:        0.1
 license:        GPL
 author:         rbm78bln
 parm:           enabled: Enable/disable diversion of ACPI S5 to either
-		   0: diversion disabled
-		   1: ACPI state S4 (without saving) [default]
-		   2: ACPI state S3 (without return vector)
-		   3: ACPI state S0 (reboot)
+                   0: diversion disabled
+                   1: ACPI state S4 (without saving) [default]
+                   2: ACPI state S3 (without return vector)
+                   3: ACPI state S0 (reboot)
 parm:           poweroff: Instantly power off the system. Default: 0
 parm:           reboot: Instantly reboot the system. Default: 0
 parm:           stroff: Instantly enter ACPI state S3 and reboot the system right away after waking up. Default: 0
