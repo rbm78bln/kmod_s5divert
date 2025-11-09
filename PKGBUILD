@@ -4,12 +4,27 @@
 _pkgbase=s5divert
 pkgname=kmod_s5divert-dkms
 pkgver=$(grep MODULE_VERSION ${_pkgbase}.c | cut '-d"' -f2)
-pkgrel=1
+pkgrel=0
 pkgdesc="A kernel module to divert system power off from ACPI S5 to S4, S3, or system reboot (DKMS)"
 arch=('i686' 'x86_64')
 url="https://github.com/rbm78bln/kmod_s5divert"
 license=('GPL2')
-depends=('dkms' 'linux-headers' 'git')
+depends=(
+	'binutils'
+	'coreutils'
+	'curl'
+	'dkms'
+	'gawk'
+	'git'
+	'grep'
+	'kmod'
+	'libarchive'
+	'linux-headers'
+	'make'
+	'pacman'
+	'sed'
+	'sudo'
+)
 install=${_pkgbase}.install
 source=(
 	'.gitignore'
@@ -52,10 +67,11 @@ build() {
 }
 
 package() {
+	mkdir -p "${pkgdir}/usr/src/${pkgname}"
+	[ -d "${srcdir}/../.git" ] && cp --archive "${srcdir}/../.git" "${pkgdir}"/usr/src/${pkgname}/.git
 	for FILE in "${source[@]}"; do
 	   install -Dm644 ${srcdir}/${pkgname}/${FILE} "${pkgdir}"/usr/src/${pkgname}/${FILE}
 	done
 	install -Dm644 ${srcdir}/${pkgname}/dkms.conf "${pkgdir}"/usr/src/${pkgname}/dkms.conf
 	install -Dm644 ${srcdir}/${pkgname}/modules-load.conf "${pkgdir}"/etc/modules-load.d/${_pkgbase}.conf
-	exit 1
 }

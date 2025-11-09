@@ -16,7 +16,7 @@ INSTALL_MOD_PATH ?= $(DESTDIR)
 
 .PHONY: all modules clean install uninstall
 
-all default: modules
+all default: modules dkms.conf
 
 update:
 	-@env GIT_TERMINAL_PROMPT=0 sh -c '[ -d .git ] && git reset --hard -q && git -c http.lowSpeedLimit=1024 -c http.lowSpeedTime=15 pull -q || (curl --speed-limit 1024 --speed-time 15 -sL "https://github.com/rbm78bln/kmod_s5divert/archive/refs/heads/main.zip" | bsdtar --extract --strip-components=1 --file -)'
@@ -25,7 +25,7 @@ aur: kmod_s5divert-dkms.pkg.tar
 
 kmod_s5divert-dkms.pkg.tar:
 	makepkg
-	mv -f kmod_s5divert-dkms-*.pkg.tar kmod_s5divert-dkms.pkg.tar
+	mv -f kmod_s5divert-dkms-*.pkg.tar* kmod_s5divert-dkms.pkg.tar
 	rm -rf src pkg
 
 dkms.conf: dkms_conf.template PKGBUILD
