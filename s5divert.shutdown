@@ -73,7 +73,7 @@ disable_lid_wakeup() {
 }
 
 lid_closed() {
-	grep -qFx closed /proc/acpi/button/lid/*/state 2>/dev/null || [ "$?" -eq "2" ]
+	grep -qF closed /proc/acpi/button/lid/*/state 2>/dev/null || [ "$?" -eq "2" ]
 	return $?
 }
 
@@ -224,7 +224,6 @@ poweroff_mbp111() {
 		disable_all_wakeup_sources
 		wait_lid_closed && enable_lid_wakeup || disable_lid_wakeup
 		# enable_wakeup_sources EC ADP1 LID0
-		enable_lid_wakeup
 		S5toS3_diverted && enter_S3off
 	fi
 	return 0
