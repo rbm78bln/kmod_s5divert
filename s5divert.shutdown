@@ -211,22 +211,24 @@ poweroff_mbp161() {
 #
 # poweroff_mbp111: Handler for Apple MacBook Pro 11,1
 #
-# This system drains it battery in S3, so divert
-# it to S4 instead if not powered externally.
-# Also the lid triggers instantly unless it's closed,
+# The lid triggers instantly unless it's closed,
 # so wait for the lid to close or disable its wake source.
-# Also kernel-level S3 don't work, so do it in userspace.
+# The power supply can only wake up the system from S3
+# and also triggers instantly when plugged-in, so only
+# enable its wakeup source, if it's unplugged and we're
+# about to enter S3. Also kernel-level S3 don't work,
+# so do it in userspace.
 #
 poweroff_mbp111() {
-	# S5toS3_diverted && ! ac_power_connected && set_s5divert S4
 	if S5toS4_diverted || S5toS3_diverted; then
 		clear_screen && turn_lights_off
-		# set_s5divert S3
 		disable_all_wakeup_sources
 		enable_wakeup_sources EC
-		# wait_lid_closed && enable_lid_wakeup || disable_lid_wakeup
+		wait_lid_closed && enable_lid_wakeup || disable_lid_wakeup
+	fi
+	if S5toS3_diverted; then
 		ac_power_connected || enable_wakeup_sources ADP1
-		S5toS3_diverted && enter_S3off
+		enter_S3off
 	fi
 	return 0
 }
